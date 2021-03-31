@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TodoApp">
         <activity android:name=".BottomFragment"></activity>
+
         <activity android:name=".AboutActivity" />
         <activity
             android:name=".MainActivity"
