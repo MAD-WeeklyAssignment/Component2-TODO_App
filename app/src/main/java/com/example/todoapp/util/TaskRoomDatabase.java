@@ -40,9 +40,8 @@ public abstract class TaskRoomDatabase extends RoomDatabase {
             }
         }
         return INSTANCE;
-
     }
-
+    public abstract Dao taskDao();
 
 
 }
