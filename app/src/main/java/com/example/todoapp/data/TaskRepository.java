@@ -17,6 +17,8 @@ public class TaskRepository {
 
     public TaskRepository(Application application) {
         TaskRoomDatabase database = TaskRoomDatabase.getDatabase(application);
+        taskDao = database.taskDao();
+        allTasks = taskDao.getTask();
 
     }
 }
