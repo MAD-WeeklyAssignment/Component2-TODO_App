@@ -63,6 +63,15 @@ public class BottomFragment extends BottomSheetDialogFragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        calenderButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calendarGroup.setVisibility(
+                        calendarGroup.getVisibility()==View.GONE ? View.VISIBLE : View.GONE
+                );
+            }
+        });
+
         saveButton.setOnClickListener(v -> {
             String task =enterTodo.getText().toString().trim();
             if(!TextUtils.isEmpty(task)){
