@@ -6,8 +6,17 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.todoapp.model.Task;
+
+import java.util.List;
+
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
+    private final List<Task> taskList;
+
+    public RecyclerViewAdapter(List<Task> taskList) {
+        this.taskList = taskList;
+    }
 
     @NonNull
     @Override
