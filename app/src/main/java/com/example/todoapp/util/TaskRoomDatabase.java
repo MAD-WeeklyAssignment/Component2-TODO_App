@@ -3,16 +3,19 @@ package com.example.todoapp.util;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
+import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.todoapp.data.TaskDao;
+import com.example.todoapp.model.Task;
 
 import java.security.PublicKey;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+@Database(entities = {Task.class}, version = 1, exportSchema = false)
 public abstract class TaskRoomDatabase extends RoomDatabase {
 
     public static final int NUMBER_OF_THREADS = 4;
