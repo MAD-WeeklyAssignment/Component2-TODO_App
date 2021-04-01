@@ -11,13 +11,17 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 public class BottomFragment extends BottomSheetDialogFragment {
 
+    public BottomFragment(){
+
+    }
+
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState
-    ) {
+            Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.bottom_layout, container, false);
+        View view = inflater.inflate(R.layout.bottom_layout, container, false);
+        return view;
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
