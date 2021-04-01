@@ -11,7 +11,6 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import com.example.todoapp.data.TaskDao;
 import com.example.todoapp.model.Task;
 
-import java.security.PublicKey;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -19,27 +18,28 @@ import java.util.concurrent.Executors;
 public abstract class TaskRoomDatabase extends RoomDatabase {
 
     public static final int NUMBER_OF_THREADS = 4;
-    public static volatile TaskRoomDatabase INSTANCE;
     public static final String DATASE_NAME = "todo_database";
     public static final ExecutorService databaseWriterExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
+    public static volatile TaskRoomDatabase INSTANCE;
 
-    public static final RoomDatabase.Callback sRoomDatabaseCallback = new RoomDatabase.Callback(){
+    public static final RoomDatabase.Callback sRoomDatabaseCallback = new RoomDatabase.Callback() {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
-            databaseWriterExecutor.execute(()->{
-                 //Invoke Dao
+            databaseWriterExecutor.execute(() -> {
+                //Invoke Dao
                 TaskDao taskDao = INSTANCE.taskDao();
                 taskDao.deleteAll();
 
 
             });
         }
-    }
-    public static TaskRoomDatabase getDatabase(final Context context){
-        if(INSTANCE==null){
-            synchronized (TaskRoomDatabase.class){
-                if (INSTANCE==null){
+    };
+
+    public static TaskRoomDatabase getDatabase(final Context context) {
+        if (INSTANCE == null) {
+            synchronized (TaskRoomDatabase.class) {
+                if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             TaskRoomDatabase.class, DATASE_NAME)
                             .addCallback(sRoomDatabaseCallback)
@@ -50,6 +50,7 @@ public abstract class TaskRoomDatabase extends RoomDatabase {
         }
         return INSTANCE;
     }
+
     public abstract TaskDao taskDao();
 
 
