@@ -19,6 +19,10 @@ public class TaskRepository {
         TaskRoomDatabase database = TaskRoomDatabase.getDatabase(application);
         taskDao = database.taskDao();
         allTasks = taskDao.getTask();
-
     }
+
+    public LiveData<List<Task>> getAllTasks(){
+        return  allTasks;
+    }
+
 }
