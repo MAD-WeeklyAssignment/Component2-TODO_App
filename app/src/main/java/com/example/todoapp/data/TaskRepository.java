@@ -32,4 +32,8 @@ public class TaskRepository {
     public LiveData<Task> get(long id){
        return taskDao.get(id);
     }
+
+    public void update(Task task){
+        TaskRoomDatabase.databaseWriterExecutor.execute(()->taskDao.update(task));
+    }
 }
