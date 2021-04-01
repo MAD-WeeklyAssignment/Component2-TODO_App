@@ -27,6 +27,8 @@ public abstract class TaskRoomDatabase extends RoomDatabase {
             databaseWriterExecutor.execute(()->{
                  //Invoke Dao
                 TaskDao taskDao = INSTANCE.taskDao();
+                taskDao.deleteAll();
+
 
             });
         }
