@@ -54,12 +54,18 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Task task = new Task("Todo", Priority.HIGH,
-                        Calendar.getInstance().getTime(), Calendar.getInstance().getTime(), false);
+//                Task task = new Task("Todo", Priority.HIGH,
+//                        Calendar.getInstance().getTime(), Calendar.getInstance().getTime(), false);
+//
+//                TaskViewModel.insert(task);
 
-                TaskViewModel.insert(task);
+                showBottomSheetDialog();
             }
         });
+    }
+
+    private void showBottomSheetDialog() {
+        bottomFragment.show(getSupportFragmentManager(), bottomFragment.getTag());
     }
 
     @Override
