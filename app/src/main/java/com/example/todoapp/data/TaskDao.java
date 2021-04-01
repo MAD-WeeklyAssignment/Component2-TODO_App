@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.todoapp.model.Task;
 
@@ -23,6 +24,9 @@ public interface TaskDao {
 
     @Query("SELECT * FROM task_table WHERE task_table.task_id == :id")
     LiveData<Task> get(long id);
+
+    @Update
+    void update(Task task);
 
 
 }
