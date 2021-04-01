@@ -28,4 +28,8 @@ public class TaskRepository {
     public void insert(Task task){
         TaskRoomDatabase.databaseWriterExecutor.execute(()->taskDao.insertTask(task));
     }
+
+    public LiveData<Task> get(long id){
+       return taskDao.get(id);
+    }
 }
