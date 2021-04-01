@@ -22,6 +22,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.chip.Chip;
 
 import java.util.Calendar;
+import java.util.Date;
 
 public class BottomFragment extends BottomSheetDialogFragment {
     private EditText enterTodo;
@@ -33,6 +34,8 @@ public class BottomFragment extends BottomSheetDialogFragment {
     private ImageButton saveButton;
     private CalendarView calendarView;
     private Group calendarGroup;
+    private Date dueDate;
+    Calendar calendar = Calendar.getInstance();
 
     public BottomFragment(){
 
@@ -63,19 +66,20 @@ public class BottomFragment extends BottomSheetDialogFragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        calenderButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                calendarGroup.setVisibility(
-                        calendarGroup.getVisibility()==View.GONE ? View.VISIBLE : View.GONE
-                );
-            }
+        calenderButton.setOnClickListener(v -> calendarGroup.setVisibility(
+                calendarGroup.getVisibility()==View.GONE ? View.VISIBLE : View.GONE
+        ));
+
+        calendarView.setOnDateChangeListener((view1, year, month, dayOfMonth) -> {
+              calendar.clear();
+              calendar.set(year,month,dayOfMonth);
+              dueDate = calendar.getTime();
         });
 
         saveButton.setOnClickListener(v -> {
             String task =enterTodo.getText().toString().trim();
-            if(!TextUtils.isEmpty(task)){
-                Task myTask = new Task(task, Priority.HIGH, Calendar.getInstance().getTime(),
+            if(!TextUtils.isEmpty(task) && dueDate != null){
+                Task myTask = new Task(task, Priority.HIGH, dueDate,
                         Calendar.getInstance().getTime(),false);
 
                 TaskViewModel.insert(myTask);
