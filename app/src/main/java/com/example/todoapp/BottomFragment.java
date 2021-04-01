@@ -4,12 +4,29 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CalendarView;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import androidx.annotation.NonNull;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
+import java.security.acl.Group;
+
 public class BottomFragment extends BottomSheetDialogFragment {
+    private EditText enterTodo;
+    private ImageButton calenderButton;
+    private ImageButton priorityButton;
+    private RadioGroup priorityRadioGroup;
+    private RadioButton priorityRadioButton;
+    private int selectedButtonId;
+    private ImageButton saveButton;
+    private CalendarView calendarView;
+    private Group calendarGroup;
 
     public BottomFragment(){
 
@@ -21,6 +38,15 @@ public class BottomFragment extends BottomSheetDialogFragment {
             Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.bottom_layout, container, false);
+
+        calendarGroup = view.findViewById(R.id.calendar_group);
+        calendarView = view.findViewById(R.id.calendar_view);
+        calenderButton = view.findViewById(R.id.today_calendar_button);
+        enterTodo = view.findViewById(R.id.enter_todo_et);
+        saveButton = view.findViewById(R.id.save_todo_button);
+        priorityButton = view.findViewById(R.id.priority_todo_button);
+        priorityRadioGroup = view.findViewById(R.id.radioGroup_priority);
+
         return view;
     }
 
