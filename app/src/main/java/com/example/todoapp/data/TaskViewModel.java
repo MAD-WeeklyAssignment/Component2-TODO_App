@@ -18,5 +18,6 @@ public class TaskViewModel extends AndroidViewModel {
     public TaskViewModel(@NonNull Application application) {
         super(application);
         repository = new TaskRepository(application);
+        allTasks = repository.getAllTasks();
     }
 }
