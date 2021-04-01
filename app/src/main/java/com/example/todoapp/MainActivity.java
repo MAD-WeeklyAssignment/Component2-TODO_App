@@ -1,7 +1,6 @@
 package com.example.todoapp;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,7 +16,6 @@ import com.example.todoapp.data.TaskViewModel;
 import com.example.todoapp.model.Priority;
 import com.example.todoapp.model.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Calendar;
 
@@ -38,9 +36,9 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         taskViewModel = new ViewModelProvider.AndroidViewModelFactory(MainActivity.this.getApplication()).create(TaskViewModel.class);
 
-        taskViewModel.getAllTasks().observe(this,tasks -> {
-           recyclerViewAdapter = new RecyclerViewAdapter(tasks);
-           recyclerView.setAdapter(recyclerViewAdapter);
+        taskViewModel.getAllTasks().observe(this, tasks -> {
+            recyclerViewAdapter = new RecyclerViewAdapter(tasks);
+            recyclerView.setAdapter(recyclerViewAdapter);
 
         });
 
@@ -48,7 +46,9 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Task task = new Task("Todo", Priority.HIGH, Calendar.getInstance().getTime(), Calendar.getInstance().getTime(),false);
+                Task task = new Task("Todo", Priority.HIGH,
+                        Calendar.getInstance().getTime(), Calendar.getInstance().getTime(), false);
+
                 TaskViewModel.insert(task);
             }
         });

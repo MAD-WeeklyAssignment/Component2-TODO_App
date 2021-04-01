@@ -21,23 +21,23 @@ public class TaskRepository {
         allTasks = taskDao.getTask();
     }
 
-    public LiveData<List<Task>> getAllTasks(){
-        return  allTasks;
+    public LiveData<List<Task>> getAllTasks() {
+        return allTasks;
     }
 
-    public void insert(Task task){
-        TaskRoomDatabase.databaseWriterExecutor.execute(()->taskDao.insertTask(task));
+    public void insert(Task task) {
+        TaskRoomDatabase.databaseWriterExecutor.execute(() -> taskDao.insertTask(task));
     }
 
-    public LiveData<Task> get(long id){
-       return taskDao.get(id);
+    public LiveData<Task> get(long id) {
+        return taskDao.get(id);
     }
 
-    public void update(Task task){
-        TaskRoomDatabase.databaseWriterExecutor.execute(()->taskDao.update(task));
+    public void update(Task task) {
+        TaskRoomDatabase.databaseWriterExecutor.execute(() -> taskDao.update(task));
     }
 
-    public void delete(Task task){
-        TaskRoomDatabase.databaseWriterExecutor.execute(()->taskDao.delete(task));
+    public void delete(Task task) {
+        TaskRoomDatabase.databaseWriterExecutor.execute(() -> taskDao.delete(task));
     }
 }
