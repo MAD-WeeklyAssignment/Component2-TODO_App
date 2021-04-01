@@ -36,4 +36,8 @@ public class TaskRepository {
     public void update(Task task){
         TaskRoomDatabase.databaseWriterExecutor.execute(()->taskDao.update(task));
     }
+
+    public void delete(Task task){
+        TaskRoomDatabase.databaseWriterExecutor.execute(()->taskDao.delete(task));
+    }
 }
