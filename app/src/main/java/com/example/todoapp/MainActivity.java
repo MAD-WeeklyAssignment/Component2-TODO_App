@@ -51,16 +51,13 @@ public class MainActivity extends AppCompatActivity {
         });
 
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        fab.setOnClickListener(view -> {
 //                Task task = new Task("Todo", Priority.HIGH,
 //                        Calendar.getInstance().getTime(), Calendar.getInstance().getTime(), false);
 //
 //                TaskViewModel.insert(task);
 
-                showBottomSheetDialog();
-            }
+            showBottomSheetDialog();
         });
     }
 

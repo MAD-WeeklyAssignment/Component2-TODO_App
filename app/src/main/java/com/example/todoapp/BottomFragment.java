@@ -1,6 +1,7 @@
 package com.example.todoapp;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +13,15 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.Group;
 
+import com.example.todoapp.data.TaskViewModel;
+import com.example.todoapp.model.Priority;
+import com.example.todoapp.model.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.chip.Chip;
 
-import java.security.acl.Group;
+import java.util.Calendar;
 
 public class BottomFragment extends BottomSheetDialogFragment {
     private EditText enterTodo;
@@ -60,6 +65,12 @@ public class BottomFragment extends BottomSheetDialogFragment {
 
         saveButton.setOnClickListener(v -> {
             String task =enterTodo.getText().toString().trim();
+            if(!TextUtils.isEmpty(task)){
+                Task myTask = new Task(task, Priority.HIGH, Calendar.getInstance().getTime(),
+                        Calendar.getInstance().getTime(),false);
+
+                TaskViewModel.insert(myTask);
+            }
 
         });
 
