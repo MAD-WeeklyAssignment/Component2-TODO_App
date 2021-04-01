@@ -58,5 +58,10 @@ public class BottomFragment extends BottomSheetDialogFragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        saveButton.setOnClickListener(v -> {
+            String task =enterTodo.getText().toString().trim();
+
+        });
+
     }
 }
