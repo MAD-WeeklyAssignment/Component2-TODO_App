@@ -39,9 +39,9 @@ public class MainActivity extends AppCompatActivity {
         taskViewModel = new ViewModelProvider.AndroidViewModelFactory(MainActivity.this.getApplication()).create(TaskViewModel.class);
 
         taskViewModel.getAllTasks().observe(this,tasks -> {
-            for (Task task : tasks){
+           recyclerViewAdapter = new RecyclerViewAdapter(tasks);
+           recyclerView.setAdapter(recyclerViewAdapter);
 
-            }
         });
 
         FloatingActionButton fab = findViewById(R.id.fab);
