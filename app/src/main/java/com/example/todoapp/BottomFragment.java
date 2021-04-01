@@ -14,6 +14,7 @@ import android.widget.RadioGroup;
 import androidx.annotation.NonNull;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.android.material.chip.Chip;
 
 import java.security.acl.Group;
 
@@ -46,6 +47,10 @@ public class BottomFragment extends BottomSheetDialogFragment {
         saveButton = view.findViewById(R.id.save_todo_button);
         priorityButton = view.findViewById(R.id.priority_todo_button);
         priorityRadioGroup = view.findViewById(R.id.radioGroup_priority);
+
+        Chip todayChip = view.findViewById(R.id.today_chip);
+        Chip tomorrowChip = view.findViewById(R.id.tomorrow_chip);
+        Chip nextWeekChip = view.findViewById(R.id.next_week_chip);
 
         return view;
     }
