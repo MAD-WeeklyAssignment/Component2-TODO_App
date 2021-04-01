@@ -2,6 +2,8 @@ package com.example.todoapp.util;
 
 import androidx.room.TypeConverter;
 
+import com.example.todoapp.model.Priority;
+
 import java.util.Date;
 
 public class Converter {
@@ -14,5 +16,10 @@ public class Converter {
     @TypeConverter
     public static Long dateToTimeStamp(Date date){
         return value == null ? null : date.getTime();
+    }
+
+    @TypeConverter
+    public static String fromPriority(Priority priority){
+        return priority == null ? null : priority.name();
     }
 }
