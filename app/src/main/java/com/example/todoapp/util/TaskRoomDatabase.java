@@ -7,6 +7,8 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.example.todoapp.data.TaskDao;
+
 import java.security.PublicKey;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -23,6 +25,8 @@ public abstract class TaskRoomDatabase extends RoomDatabase {
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
             databaseWriterExecutor.execute(()->{
+                 //Invoke Dao
+                TaskDao taskDao = INSTANCE.taskDao();
 
             });
         }
@@ -41,7 +45,7 @@ public abstract class TaskRoomDatabase extends RoomDatabase {
         }
         return INSTANCE;
     }
-    public abstract Dao taskDao();
+    public abstract TaskDao taskDao();
 
 
 }
