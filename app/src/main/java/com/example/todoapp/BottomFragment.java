@@ -2,6 +2,7 @@ package com.example.todoapp;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +14,11 @@ import android.widget.RadioGroup;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.Group;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.todoapp.data.TaskViewModel;
 import com.example.todoapp.model.Priority;
+import com.example.todoapp.model.SharedViewModel;
 import com.example.todoapp.model.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.chip.Chip;
@@ -35,6 +38,7 @@ public class BottomFragment extends BottomSheetDialogFragment implements View.On
     private CalendarView calendarView;
     private Group calendarGroup;
     private Date dueDate;
+    private SharedViewModel sharedViewModel;
 
     public BottomFragment() {
 
@@ -65,8 +69,20 @@ public class BottomFragment extends BottomSheetDialogFragment implements View.On
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (sharedViewModel.getSelectedItem().getValue() !=null){
+            Task task = sharedViewModel.getSelectedItem().getValue();
+            enterTodo.setText(task.getTask());
+            Log.d("View", "onViewCreated: "+task.getTask());
+        }
+    }
+
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
 
         calenderButton.setOnClickListener(v -> calendarGroup.setVisibility(
                 calendarGroup.getVisibility() == View.GONE ? View.VISIBLE : View.GONE
