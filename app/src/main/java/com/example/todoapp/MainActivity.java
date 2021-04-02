@@ -97,4 +97,11 @@ public class MainActivity extends AppCompatActivity implements OnTodoClickListen
         Log.d("Click","onTodoClick: "+task.getTask());
 
     }
+    /*
+    * Action perform when radio button clicked
+    */
+    @Override
+    public void onTodoRadioButtonClick(Task task) {
+        Log.d("Click","onTodoClick: "+task.getTask());
+    }
 }
