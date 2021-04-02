@@ -1,10 +1,8 @@
 package com.example.todoapp;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -16,13 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.todoapp.adapter.OnTodoClickListener;
 import com.example.todoapp.adapter.RecyclerViewAdapter;
 import com.example.todoapp.data.TaskViewModel;
-import com.example.todoapp.model.Priority;
 import com.example.todoapp.model.SharedViewModel;
 import com.example.todoapp.model.Task;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity implements OnTodoClickListener {
     private TaskViewModel taskViewModel;
@@ -86,10 +81,10 @@ public class MainActivity extends AppCompatActivity implements OnTodoClickListen
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.action_exit) {
+            finish();
+            System.exit(0);
         }
-
         return super.onOptionsItemSelected(item);
     }
 
