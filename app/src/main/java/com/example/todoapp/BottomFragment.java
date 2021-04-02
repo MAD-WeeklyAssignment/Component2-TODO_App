@@ -39,6 +39,7 @@ public class BottomFragment extends BottomSheetDialogFragment implements View.On
     private Group calendarGroup;
     private Date dueDate;
     private SharedViewModel sharedViewModel;
+    private boolean isEdit;
 
     public BottomFragment() {
 
@@ -73,6 +74,7 @@ public class BottomFragment extends BottomSheetDialogFragment implements View.On
     public void onResume() {
         super.onResume();
         if (sharedViewModel.getSelectedItem().getValue() !=null){
+            isEdit = sharedViewModel.getIsEdit();
             Task task = sharedViewModel.getSelectedItem().getValue();
             enterTodo.setText(task.getTask());
             Log.d("View", "onViewCreated: "+task.getTask());
@@ -99,6 +101,17 @@ public class BottomFragment extends BottomSheetDialogFragment implements View.On
             if (!TextUtils.isEmpty(task) && dueDate != null) {
                 Task myTask = new Task(task, Priority.HIGH, dueDate,
                         Calendar.getInstance().getTime(), false);
+                if(isEdit){
+                    Task updateTask = sharedViewModel.getSelectedItem().getValue();
+                    updateTask.setTask(task);
+                    updateTask.setDateCreated(Calendar.getInstance().getTime());
+                    updateTask.setPriority(Priority.HIGH);
+                    updateTask.setDueDate(dueDate);
+                    TaskViewModel.update(updateTask);
+                    sharedViewModel.setIsEdit(false);
+                }else{
+                    TaskViewModel.insert(myTask);
+                }
 
                 TaskViewModel.insert(myTask);
             }
