@@ -20,8 +20,10 @@ import com.example.todoapp.data.TaskViewModel;
 import com.example.todoapp.model.Priority;
 import com.example.todoapp.model.SharedViewModel;
 import com.example.todoapp.model.Task;
+import com.example.todoapp.util.Utils;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.chip.Chip;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -89,6 +91,7 @@ public class BottomFragment extends BottomSheetDialogFragment implements View.On
         calenderButton.setOnClickListener(v -> calendarGroup.setVisibility(
                 calendarGroup.getVisibility() == View.GONE ? View.VISIBLE : View.GONE
         ));
+        Utils.hideKeyboard(view);
 
         calendarView.setOnDateChangeListener((view1, year, month, dayOfMonth) -> {
             calendar.clear();
@@ -112,9 +115,15 @@ public class BottomFragment extends BottomSheetDialogFragment implements View.On
                 }else{
                     TaskViewModel.insert(myTask);
                 }
+                enterTodo.setText("");
+                if (this.isVisible()){
+                    this.dismiss();
+                }
 
-                TaskViewModel.insert(myTask);
+            }else {
+                Snackbar.make(saveButton, R.string.empty_field, Snackbar.LENGTH_LONG).show();
             }
+
 
         });
 
