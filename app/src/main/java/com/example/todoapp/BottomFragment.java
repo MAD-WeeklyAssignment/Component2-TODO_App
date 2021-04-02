@@ -34,7 +34,7 @@ public class BottomFragment extends BottomSheetDialogFragment implements View.On
     private ImageButton calenderButton;
     private ImageButton priorityButton;
     private RadioGroup priorityRadioGroup;
-    private RadioButton priorityRadioButton;
+    private RadioButton selectedRadioButton;
     private int selectedButtonId;
     private ImageButton saveButton;
     private CalendarView calendarView;
@@ -42,6 +42,7 @@ public class BottomFragment extends BottomSheetDialogFragment implements View.On
     private Date dueDate;
     private SharedViewModel sharedViewModel;
     private boolean isEdit;
+    private Priority priority;
 
     public BottomFragment() {
 
@@ -99,16 +100,40 @@ public class BottomFragment extends BottomSheetDialogFragment implements View.On
             dueDate = calendar.getTime();
         });
 
+        priorityButton.setOnClickListener(v -> {
+            Utils.hideKeyboard(v);
+            priorityRadioGroup.setVisibility(
+                    priorityRadioGroup.getVisibility() == View.GONE ? View.VISIBLE : View.GONE
+            );
+            priorityRadioGroup.setOnCheckedChangeListener((radioGroup, checkedId) -> {
+                if (priorityRadioGroup.getVisibility() == View.VISIBLE){
+                    selectedButtonId = checkedId;
+                    selectedRadioButton = view.findViewById(selectedButtonId);
+                    if(selectedRadioButton.getId() == R.id.radioButton_high){
+                        priority = Priority.HIGH;
+                    }else if(selectedRadioButton.getId() == R.id.radioButton_med){
+                        priority = Priority.MEDIUM;
+                    }else if(selectedRadioButton.getId() == R.id.radioButton_low){
+                        priority = Priority.LOW;
+                    }else {
+                        priority = Priority.LOW;
+                    }
+                }else {
+                    priority = Priority.LOW;
+                }
+            });
+        });
+
         saveButton.setOnClickListener(v -> {
             String task = enterTodo.getText().toString().trim();
-            if (!TextUtils.isEmpty(task) && dueDate != null) {
-                Task myTask = new Task(task, Priority.HIGH, dueDate,
+            if (!TextUtils.isEmpty(task) && dueDate != null && priority != null) {
+                Task myTask = new Task(task, priority, dueDate,
                         Calendar.getInstance().getTime(), false);
                 if(isEdit){
                     Task updateTask = sharedViewModel.getSelectedItem().getValue();
                     updateTask.setTask(task);
                     updateTask.setDateCreated(Calendar.getInstance().getTime());
-                    updateTask.setPriority(Priority.HIGH);
+                    updateTask.setPriority(priority);
                     updateTask.setDueDate(dueDate);
                     TaskViewModel.update(updateTask);
                     sharedViewModel.setIsEdit(false);
