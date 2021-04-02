@@ -103,5 +103,8 @@ public class MainActivity extends AppCompatActivity implements OnTodoClickListen
     @Override
     public void onTodoRadioButtonClick(Task task) {
         Log.d("Click","onTodoClick: "+task.getTask());
+        TaskViewModel.delete(task); //Task will be deleted
+        recyclerViewAdapter.notifyDataSetChanged(); //Notify data will be changed
+
     }
 }
