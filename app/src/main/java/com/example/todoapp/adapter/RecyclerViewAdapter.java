@@ -20,6 +20,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     private final List<Task> taskList;
 
+
     public RecyclerViewAdapter(List<Task> taskList) {
         this.taskList = taskList;
     }
