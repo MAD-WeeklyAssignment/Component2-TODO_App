@@ -19,10 +19,12 @@ import java.util.List;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
     private final List<Task> taskList;
+    private final OnTodoClickListener todoClickListener;
 
 
-    public RecyclerViewAdapter(List<Task> taskList) {
+    public RecyclerViewAdapter(List<Task> taskList, OnTodoClickListener onTodoClickListener) {
         this.taskList = taskList;
+        this.todoClickListener = onTodoClickListener;
     }
 
     @NonNull
