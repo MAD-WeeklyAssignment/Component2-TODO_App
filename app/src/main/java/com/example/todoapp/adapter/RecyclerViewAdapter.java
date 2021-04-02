@@ -60,10 +60,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             todayChip = itemView.findViewById(R.id.todo_row_chip);
             task = itemView.findViewById(R.id.todo_row_todo);
             this.onTodoClickListener = todoClickListener;
+
+            itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
+            int id = v.getId();
+            if(id ==R.id.todo_row_layout){
+                Task currTask = taskList.get(getAdapterPosition());
+                onTodoClickListener.onTodoClick(getAdapterPosition(), currTask);
+            }
 
         }
     }
