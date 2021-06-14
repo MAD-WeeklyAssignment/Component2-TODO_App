@@ -1,4 +1,4 @@
-# Component2-TODO_App
+#TODO_App
 ## GIF
 ### TodoApp Running - gif
 <img src="/comp2_img/img17.gif" width=300>
